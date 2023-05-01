@@ -33,14 +33,24 @@ const ProductInfoBox = styled.div`
     margin-top: 5px;
 `
 const PriceRow = styled.div`
-    display: flex;
+    display: block;
+    @media screen and (min-width: 768px) {
+        display: flex;
+        gap: 5px;
+    }
     align-items: center;
     justify-content: space-between;
     margin-top: 2px;
 `
 const Price = styled.div`
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: right;
+    @media screen and (min-width: 768px) {
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-align: left;
+    }
 `
 
 export default function ProductBox({_id, title, description, price, images}) {
@@ -58,7 +68,11 @@ export default function ProductBox({_id, title, description, price, images}) {
                         <Price>${price}</Price>
                     </div>
                     <div>
-                        <Button onClick={() => addProduct(_id)} primary outline>Add to cart</Button>
+                        <Button 
+                            onClick={() => addProduct(_id)} 
+                            block primary outline>
+                            Add to cart
+                        </Button>
                     </div>
                 </PriceRow>
             </ProductInfoBox>
