@@ -49,7 +49,7 @@ export default function ProductBox({_id, title, description, price, images}) {
     return (
         <ProductWrapper>
             <WhiteBox href={url}>
-                <img src={images[0]} alt="" />
+                <img src={images?.[0]} alt="" />
             </WhiteBox>
             <ProductInfoBox>
                 <Title href={url}>{title}</Title>
