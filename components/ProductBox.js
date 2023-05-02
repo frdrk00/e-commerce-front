@@ -1,8 +1,6 @@
 import styled from "styled-components"
-import Button from "./Button"
 import Link from "next/link"
-import { useContext } from "react"
-import { CartContext } from "./CartContext"
+import FlyingButton from "./FlyingButton"
 
 const ProductWrapper = styled.div`
     
@@ -54,26 +52,19 @@ const Price = styled.div`
 `
 
 export default function ProductBox({_id, title, description, price, images}) {
-    const {addProduct} = useContext(CartContext)
     const url = `/product/${_id}`
     return (
         <ProductWrapper>
             <WhiteBox href={url}>
-                <img src={images?.[0]} alt="" />
+                <div>
+                    <img src={images?.[0]} alt="" />
+                </div>
             </WhiteBox>
             <ProductInfoBox>
                 <Title href={url}>{title}</Title>
                 <PriceRow>
-                    <div>
-                        <Price>${price}</Price>
-                    </div>
-                    <div>
-                        <Button 
-                            onClick={() => addProduct(_id)} 
-                            block primary outline>
-                            Add to cart
-                        </Button>
-                    </div>
+                    <Price>${price}</Price>
+                    <FlyingButton _id={_id} src={images?.[0]}>Add to cart</FlyingButton>
                 </PriceRow>
             </ProductInfoBox>
         </ProductWrapper>
