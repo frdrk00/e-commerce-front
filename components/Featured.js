@@ -32,12 +32,14 @@ const ColumnsWrapper = styled.div`
         display: block;
         margin: 0 auto;
     }
-    div: nth-child(1) {
+    div:nth-child(1) {
         order: 2;
+        margin-left: auto;
+        margin-right: auto;
     }
     @media screen and (min-width: 768px) {
     grid-template-columns: 1fr .9fr;
-    div: nth-child(1) {
+    & > div:nth-child(1) {
         order: 0;
     }
     img{
@@ -54,6 +56,19 @@ const ButtonsWrapper = styled.div`
     gap: 10px;
     margin-top: 25px;
 `
+const CenterImg = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+const ImgColumn = styled(Column)`
+    & > div{
+        width: 100%;
+    }
+`
+const ContentWrapper = styled.div`
+    
+`
 
 export default function Featured({product}) {
     return (
@@ -63,6 +78,7 @@ export default function Featured({product}) {
                     <Column>
                         <div>
                             <RevealWrapper origin={'left'} delay={0}>
+                                <ContentWrapper>
                                     <Title>{product.title}</Title>
                                     <Desc>{product.description}</Desc>
                                 <ButtonsWrapper>
@@ -73,15 +89,19 @@ export default function Featured({product}) {
                                         <CartIcon />
                                         Add to cart
                                     </FlyingButton>
-                                </ButtonsWrapper>
+                                </ButtonsWrapper>                                    
+                                </ContentWrapper>
+
                             </RevealWrapper>
                         </div>                        
                     </Column>
-                    <Column>
+                    <ImgColumn>
                         <RevealWrapper delay={0}>
-                            <img className={'main'} src="https://i.ibb.co/qn84dHS/pngegg-1.png" alt="" />
+                            <CenterImg>
+                               <img className={'main'} src={product.images?.[0]} alt="" /> 
+                            </CenterImg>
                         </RevealWrapper>
-                    </Column>
+                    </ImgColumn>
                 </ColumnsWrapper>
             </Center>
         </Bg>
