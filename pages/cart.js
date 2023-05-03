@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Input from "@/components/Input";
 import Table from "@/components/Table";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { RevealWrapper } from "next-reveal";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
@@ -65,6 +66,7 @@ const CityHolder = styled.div`
 
 export default function CartPage() {
     const {cartProducts, addProduct, removeProduct, clearCart} = useContext(CartContext)
+    const {data:session} = useSession()
     const [products, setProducts] = useState([])
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -94,8 +96,11 @@ export default function CartPage() {
             clearCart()
         }
     }, []);
-    
+
     useEffect(() => {
+        if (!session) {
+            return
+        }
     axios.get('/api/address').then(response => {
       setName(response.data.name);
       setEmail(response.data.email);
