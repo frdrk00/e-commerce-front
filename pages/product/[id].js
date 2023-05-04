@@ -1,14 +1,13 @@
 import WhiteBox from "@/components/Box";
-import { CartContext } from "@/components/CartContext";
 import Center from "@/components/Center";
 import FlyingButton from "@/components/FlyingButton";
 import Header from "@/components/Header";
 import ProductImages from "@/components/ProductImages";
+import ProductReviews from "@/components/ProductReviews";
 import Title from "@/components/Title";
 import CartIcon from "@/components/icons/Cart";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
-import { useContext } from "react";
 import styled from "styled-components";
 
 const ColWrapper = styled.div`
@@ -55,6 +54,7 @@ export default function ProductPage({product}) {
                         </PriceRow>
                     </div>
                 </ColWrapper>
+                <ProductReviews product={product} />
             </Center>
         </>
     )

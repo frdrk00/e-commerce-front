@@ -1,6 +1,5 @@
+import  {model, models, Schema} from "mongoose";
 import { Product } from "./Product";
-
-const { Schema, models, model } = require("mongoose");
 
 const WishedProductSchema = new Schema({
     userEmail: {type: String, required: true},
