@@ -146,6 +146,7 @@ export default function CartPage() {
 
         if (response.data.url) {
             window.location = response.data.url
+            console.log(response.data.url);
         }
     }
 
@@ -155,6 +156,7 @@ export default function CartPage() {
         productsTotal += price
     }
 
+    
     if (isSuccess) {
         return (
             <>
