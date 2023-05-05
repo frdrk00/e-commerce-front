@@ -9,6 +9,7 @@ import { RevealWrapper } from 'next-reveal'
 import { authOptions } from "./api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import { WishedProduct } from "@/models/WishedProduct";
+import Footer from "@/components/Footer";
 
 
 const CategoryGrid = styled.div`
@@ -76,6 +77,7 @@ export default function CategoriesPage({mainCategories, categoriesProducts, wish
                     </CategoryWrapper>
                 ))}
             </Center>
+            <Footer />
         </>
     )
 }

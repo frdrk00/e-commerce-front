@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import { CartContext } from "@/components/CartContext";
 import Center from "@/components/Center";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
 import Table from "@/components/Table";
@@ -14,8 +15,7 @@ const ColumnsWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin: 40px 0;
     @media screen and (min-width: 768px) {
         grid-template-columns: 1.2fr .8fr;
     }
@@ -288,6 +288,7 @@ export default function CartPage() {
                     )}
                 </ColumnsWrapper>
             </Center>
+            <Footer />
         </>
     )
 }

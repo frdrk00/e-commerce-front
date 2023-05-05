@@ -1,4 +1,5 @@
 import Center from "@/components/Center";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
 import ProductsGrid from "@/components/ProductsGrid";
@@ -65,6 +66,7 @@ export default function SearchPage() {
           <ProductsGrid products={products} />
         )}
       </Center>
+      <Footer />
     </>
   );
 }

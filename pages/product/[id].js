@@ -1,6 +1,7 @@
 import WhiteBox from "@/components/Box";
 import Center from "@/components/Center";
 import FlyingButton from "@/components/FlyingButton";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ProductImages from "@/components/ProductImages";
 import ProductReviews from "@/components/ProductReviews";
@@ -56,6 +57,7 @@ export default function ProductPage({product}) {
                 </ColWrapper>
                 <ProductReviews product={product} />
             </Center>
+            <Footer />
         </>
     )
 }

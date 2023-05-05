@@ -12,19 +12,23 @@ import { RevealWrapper } from "next-reveal"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import SingleOrder from "@/components/SingleOrder"
+import Footer from "@/components/Footer"
 
     const ColsWrapper = styled.div`
         display: grid;
-        grid-template-columns: 1.2fr .8fr;
+        grid-template-columns: 1fr;
         gap: 40px;
         margin: 40px 0;
         p{
             margin: 5px;
         }
+        @media screen and (min-width: 768px) {
+            grid-template-columns: 1.2fr .8fr;
+        }
     `
     const CityHolder = styled.div`
         display: flex;
-        gap: 5;
+        gap: 5px;
     `
     const WishedProductsGrid = styled.div`
         display: grid;
@@ -106,46 +110,53 @@ export default function AccountPage() {
                                     onChange={setActiveTab} 
                                 />
                                 {activeTab === 'Orders' && (
+                                <>
+                                {!orderLoaded && (
+                                <Spinner fullWidth={true} />
+                                )}
+                                {orderLoaded && (
+                                <div>
+                                    {orders.length === 0 && (
                                     <>
-                                        {!orderLoaded && (
-                                            <Spinner fullWidth={true} />
-                                        )}
-                                        {orderLoaded && (
-                                            <div>
-                                                {orders.length === 0 && (
-                                                    <p>Login to see your orders</p>
-                                                )}
-                                                {orders.length > 0 && orders.map(o => (
-                                                    <SingleOrder key={o._id} {...o} />
-                                                ))}
-                                            </div>
+                                    {session && (
+                                        <p>You have not placed any orders</p>
+                                    )}
+                                    {!session && (
+                                        <p>Login to see your orders</p>
+                                    )}
+                                    </>
+                                    )}
+                                    {orders.length > 0 && orders.map(o => (
+                                    <SingleOrder key={o._id} {...o} />
+                                    ))}
+                                </div>
+                                )}
+                                </>
+                                )}
+                                {activeTab === 'Wishlist' && (
+                                <>
+                                <>{!session && ( <p>Login to add product to your wishlist</p>)}</>
+                                {!wishlistLoaded && (
+                                    <Spinner fullWidth={true} />
+                                )}
+                                {wishlistLoaded && (
+                                    <>
+                                    <WishedProductsGrid>
+                                        {wishedProducts.length > 0 && wishedProducts.map(wp => (
+                                            <ProductBox 
+                                                key={wp._id} 
+                                                {...wp} 
+                                                wished={true} 
+                                                onRemoveFromWishlist={productRemovedFromWishlist} 
+                                            />
+                                        ))}
+                                    </WishedProductsGrid>
+                                        {wishedProducts.length === 0 && (
+                                            <>{session && ( <p>Your wishlist is empty</p>)}</>
                                         )}
                                     </>
                                 )}
-                                {activeTab === 'Wishlist' && (
-                                    <>
-                                        <>{!session && ( <p>Login to add product to your wishlist</p>)}</>
-                                        {!wishlistLoaded && (
-                                            <Spinner fullWidth={true} />
-                                        )}
-                                        {wishlistLoaded && (
-                                            <>
-                                            <WishedProductsGrid>
-                                                {wishedProducts.length > 0 && wishedProducts.map(wp => (
-                                                    <ProductBox 
-                                                        key={wp._id} 
-                                                        {...wp} 
-                                                        wished={true} 
-                                                        onRemoveFromWishlist={productRemovedFromWishlist} 
-                                                    />
-                                                ))}
-                                            </WishedProductsGrid>
-                                                {wishedProducts.length === 0 && (
-                                                    <>{session && ( <p>Your wishlist is empty</p>)}</>
-                                                )}
-                                            </>
-                                        )}
-                                    </> 
+                                </> 
                                 )}
                                 
                             </WhiteBox>
@@ -222,6 +233,7 @@ export default function AccountPage() {
                     </div>
                 </ColsWrapper>
             </Center>
+            <Footer />
         </>
     )
 }
